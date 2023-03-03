@@ -36,49 +36,10 @@ class _SiparisSatirlarViewState extends ConsumerState<SiparisSatirlarView> {
       },
       child: SafeArea(
           child: Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => _fab(context),
-          label: const Text("Teslim al"),
-          icon: const Icon(Icons.check_circle_outline),
-        ),
         appBar: AppBar(title: const Text('Sipariş Satırları')),
         body: _body(),
       )),
     );
-  }
-
-  Future<void> _fab(BuildContext context) async {
-    if (ref
-        .watch(provider)
-        .siparisSatirlari
-        .where((element) => !element.isAdded)
-        .isNotEmpty) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text("Dikkat"),
-              content: const Text(
-                  "Siparişinizde eksik ürün var. Yinede devam etmek istiyor musunuz ?"),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context, false);
-                    },
-                    child: const Text("Hayır")),
-                TextButton(
-                    onPressed: () async {
-                      Navigator.pop(context, false);
-                      bool success = await ref.read(provider).teslimAl();
-                      if (success) {
-                        Navigator.pop(context, true);
-                      }
-                    },
-                    child: const Text("Evet")),
-              ],
-            );
-          });
-    }
   }
 
   Future<dynamic> _backDialog(BuildContext context) {
@@ -126,17 +87,22 @@ class _SiparisSatirlarViewState extends ConsumerState<SiparisSatirlarView> {
         children: [
           const Text("Henüz eklenmemiş ürünler"),
           const Divider(),
-          ListView.builder(
-              shrinkWrap: true,
-              itemCount: ref
-                  .watch(provider)
-                  .siparisSatirlari
-                  .where((element) => !element.isAdded)
-                  .length,
-              itemBuilder: (context, index) {
-                return _siparisSatir(
-                    ref.watch(provider).siparisSatirlari[index]);
-              }),
+          Expanded(
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: ref
+                    .watch(provider)
+                    .siparisSatirlari
+                    .where((element) => !element.isAdded)
+                    .length,
+                itemBuilder: (context, index) {
+                  return _siparisSatir(ref
+                      .watch(provider)
+                      .siparisSatirlari
+                      .where((element) => !element.isAdded)
+                      .toList()[index]);
+                }),
+          ),
           const Divider(height: 20, color: Colors.black, thickness: 2),
           const Text("Eklenmiş ürünler"),
           const Divider(),
@@ -148,8 +114,11 @@ class _SiparisSatirlarViewState extends ConsumerState<SiparisSatirlarView> {
                   .where((element) => element.isAdded)
                   .length,
               itemBuilder: (context, index) {
-                return _siparisSatir(
-                    ref.watch(provider).siparisSatirlari[index]);
+                return _siparisSatir(ref
+                    .watch(provider)
+                    .siparisSatirlari
+                    .where((element) => element.isAdded)
+                    .toList()[index]);
               }),
         ],
       ),
@@ -164,15 +133,16 @@ class _SiparisSatirlarViewState extends ConsumerState<SiparisSatirlarView> {
         tileColor: siparisSatirModel.isAdded ? Colors.green : Colors.white,
         onChanged: (value) {
           ref
-              .read(provider)
+              .watch(provider)
               .siparisSatirlari
               .firstWhere((element) => element.id == siparisSatirModel.id)
               .isAdded = value!;
-          ref.read(provider).notifyListeners();
+          ref.watch(provider).notifyListeners();
         },
         title: Text(siparisSatirModel.product.name),
         secondary: CachedNetworkImage(
           imageUrl: siparisSatirModel.product.mainImageThumbUrl,
+          placeholder: (context, url) => const CircularProgressIndicator(),
         ),
         subtitle: Column(
           mainAxisAlignment: MainAxisAlignment.start,

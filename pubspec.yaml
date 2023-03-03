@@ -43,6 +43,7 @@ dependencies:
   flutter_riverpod: ^2.3.0
   cached_network_image: ^3.2.3
   qr_bar_code_scanner_dialog: ^0.0.5
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:
