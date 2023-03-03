@@ -1,0 +1,23 @@
+{
+    "data": [
+        {
+            "CariName": "Ömer Gökbayrak Edit",
+            "OrderGuid": "ed8a4057-48ba-4264-8c55-25af5b5fb4e3", // göstermiyoruz
+            "OrderID": 1128, // göstermiyoruz
+            "FicheNo": "000120231128", // başlık
+            "OrderDate": "2023-03-01T18:56:10.687",
+            "PaymentTypeName": "Kapıda Nakit Ödeme",
+            "LineCount": 1, // göstermiyoruz ama ayrıntıda gösteriyoruz
+            "Total": 0.02,
+            "DeliveryAdressDetail": { // adres butonu olsun her satırda. ona tıklayınca popupda adres çıksın veya widget genişlesin adres gözüksün
+                "ID": 40,
+                "AdresBasligi": "Deneme oguz",
+                "MobilePhone": "905309140663",
+                "Email": "",
+                "Address": "23, Yılmaz Sokak, Hürriyet, Oğuzeli, Gaziantep, Turkey, 27900",
+                "RelatedPerson": null,
+                "DeliveryDate": null
+            }
+        }
+    ]
+}

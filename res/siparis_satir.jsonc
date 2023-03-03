@@ -1,0 +1,32 @@
+{
+    "data": [
+        {
+            "ID": 8966,
+            "Product": {
+                "ID": 928,
+                "Barcode": "2700077", // *
+                "Name": "Acı Biber Salça Gün Kg", // *
+                "TradeMark": "",
+                "UnitPrice": 0.01,
+                "VaryantID": 0,
+                "ColorName": "",
+                "Beden": 0,
+                "Miktar": 1.0, // *
+                "Aciklama": "", // boş string geldiyse çekmesin değilse gösterilsin
+                "UnitCode": "KG", // *
+                "MainImageThumbUrl": "http://www.turbim.com/api/ecom/Files\\Files_2022\\Files_09\\Files_02\\Files_CRD_Items\\thumb_5924.png", // *
+                "InSale": true,
+                "CanShipped": true,
+                "BasketQty": null,
+                "BasketFactor": 0.2,
+                "FavoriteID": 0,
+                "Evaluation": {
+                    "EvaluationsCount": 8,
+                    "EvaluationsAvg": 4.63
+                }
+            },
+            "Amount": 1.0, // *
+            "Notes": null
+        }
+    ]
+}
