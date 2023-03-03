@@ -32,40 +32,44 @@ class _LoginViewState extends ConsumerState<LoginView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Center(
-              child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset("assets/images/png/login.png"),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                hintText: "Kullanıcı adı",
+          body: SingleChildScrollView(
+        child: Center(
+            child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset("assets/images/png/login.png"),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(hintText: "Kullanıcı adı"),
               ),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                hintText: "Şifre",
+              const SizedBox(height: 20),
+              TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(hintText: "Şifre"),
+                onSubmitted: (value) {
+                  ref.read(provider).login(
+                        _usernameController.text,
+                        _passwordController.text,
+                      );
+                },
               ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                ref.read(provider).login(
-                      _usernameController.text,
-                      _passwordController.text,
-                    );
-              },
-              child: const Text("Giriş yap"),
-            ),
-          ],
-        ),
-      ))),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  ref.read(provider).login(
+                        _usernameController.text,
+                        _passwordController.text,
+                      );
+                },
+                child: const Text("Giriş yap"),
+              ),
+            ],
+          ),
+        )),
+      )),
     );
   }
 }

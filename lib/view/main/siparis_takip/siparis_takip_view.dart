@@ -50,12 +50,14 @@ class _SiparisTakipViewState extends ConsumerState<SiparisTakipView> {
     return Column(
       children: [
         FilterQrTextfield(onChanged: ref.read(provider).onChanged),
-        ListView.builder(
-            shrinkWrap: true,
-            itemCount: ref.watch(provider).ordersFiltered.length,
-            itemBuilder: (context, index) {
-              return _siparisSatir(ref.watch(provider).ordersFiltered[index]);
-            })
+        Expanded(
+          child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: ref.watch(provider).ordersFiltered.length,
+              itemBuilder: (context, index) {
+                return _siparisSatir(ref.watch(provider).ordersFiltered[index]);
+              }),
+        )
       ],
     );
   }
