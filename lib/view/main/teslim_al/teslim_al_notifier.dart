@@ -50,7 +50,11 @@ class TeslimAlNotifier extends ChangeNotifier
   void onChanged(String value) {
     ordersFiltered = orders
         .where((element) =>
-            element.ficheNo.toLowerCase().contains(value.toLowerCase()))
+            element.ficheNo.toLowerCase().contains(value.toLowerCase()) ||
+            element.packageList.any((element) => element
+                .toLowerCase()
+                .trim()
+                .contains(value.toLowerCase().trim())))
         .toList();
     notifyListeners();
   }

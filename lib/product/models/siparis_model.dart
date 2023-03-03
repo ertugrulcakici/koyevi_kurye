@@ -7,6 +7,7 @@ class SiparisModel {
   final String paymentTypeName;
   final int lineCount;
   final double total;
+  final List<String> packageList;
   final DeliveryAddressDetailModel deliveryAddresDetail;
 
   SiparisModel(
@@ -18,6 +19,7 @@ class SiparisModel {
       required this.paymentTypeName,
       required this.lineCount,
       required this.total,
+      required this.packageList,
       required this.deliveryAddresDetail});
 
   factory SiparisModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,7 @@ class SiparisModel {
         paymentTypeName: json['PaymentTypeName'],
         lineCount: json['LineCount'],
         total: json['Total'],
+        packageList: json['PackageList'].cast<String>(),
         deliveryAddresDetail:
             DeliveryAddressDetailModel.fromJson(json['DeliveryAdressDetail']));
   }
@@ -42,6 +45,7 @@ class DeliveryAddressDetailModel {
   late final String email;
   final String address;
   final String? relatedPerson;
+  final String googleMapsUrl;
 
   // create a fromJson method but take all attributes start with lowercase
   DeliveryAddressDetailModel.fromJson(Map<String, dynamic> json)
@@ -50,5 +54,6 @@ class DeliveryAddressDetailModel {
         mobilePhone = json["MobilePhone"],
         email = json['Email'],
         address = json['Address'],
+        googleMapsUrl = json['GoogleMapsUrl'],
         relatedPerson = json['RelatedPerson'];
 }

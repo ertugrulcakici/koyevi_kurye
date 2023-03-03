@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koyevi_kurye/product/models/siparis_model.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class SiparisSatirListTile extends StatefulWidget {
   final SiparisModel siparisModel;
@@ -47,10 +48,31 @@ class _SiparisSatirListTileState extends State<SiparisSatirListTile> {
                                   "Email:${siparisModel.deliveryAddresDetail.email}")
                               : Container(),
                           Text(
-                              "Adres: ${siparisModel.deliveryAddresDetail.address}")
+                              "Adres: ${siparisModel.deliveryAddresDetail.address}"),
+                          const Divider(),
+                          TextButton(
+                              onPressed: () {
+                                launchUrlString(
+                                    siparisModel
+                                        .deliveryAddresDetail.googleMapsUrl,
+                                    mode: LaunchMode
+                                        .externalNonBrowserApplication);
+                              },
+                              child: const Text("Haritada göster"))
                         ],
                       )
-                    ])
+                    ]),
+                ExpansionTile(
+                  title: const Text("Paket numaraları"),
+                  children: [
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: siparisModel.packageList.length,
+                        itemBuilder: (context, index) {
+                          return Text(siparisModel.packageList[index]);
+                        })
+                  ],
+                )
               ],
             ),
           ),
