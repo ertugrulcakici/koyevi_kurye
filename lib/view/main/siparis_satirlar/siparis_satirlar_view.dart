@@ -83,44 +83,42 @@ class _SiparisSatirlarViewState extends ConsumerState<SiparisSatirlarView> {
   Widget _content() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          const Text("Henüz eklenmemiş ürünler"),
-          const Divider(),
-          Expanded(
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: ref
-                    .watch(provider)
-                    .siparisSatirlari
-                    .where((element) => !element.isAdded)
-                    .length,
-                itemBuilder: (context, index) {
-                  return _siparisSatir(ref
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Text("Henüz eklenmemiş ürünler"),
+            const Divider(),
+            Column(
+              children: List.generate(
+                  ref
                       .watch(provider)
                       .siparisSatirlari
                       .where((element) => !element.isAdded)
-                      .toList()[index]);
-                }),
-          ),
-          const Divider(height: 20, color: Colors.black, thickness: 2),
-          const Text("Eklenmiş ürünler"),
-          const Divider(),
-          ListView.builder(
-              shrinkWrap: true,
-              itemCount: ref
-                  .watch(provider)
-                  .siparisSatirlari
-                  .where((element) => element.isAdded)
-                  .length,
-              itemBuilder: (context, index) {
-                return _siparisSatir(ref
-                    .watch(provider)
-                    .siparisSatirlari
-                    .where((element) => element.isAdded)
-                    .toList()[index]);
-              }),
-        ],
+                      .length,
+                  (index) => _siparisSatir(ref
+                      .watch(provider)
+                      .siparisSatirlari
+                      .where((element) => !element.isAdded)
+                      .toList()[index])),
+            ),
+            const Divider(height: 20, thickness: 2),
+            const Text("Eklenmiş ürünler"),
+            const Divider(),
+            Column(
+              children: List.generate(
+                  ref
+                      .watch(provider)
+                      .siparisSatirlari
+                      .where((element) => element.isAdded)
+                      .length,
+                  (index) => _siparisSatir(ref
+                      .watch(provider)
+                      .siparisSatirlari
+                      .where((element) => element.isAdded)
+                      .toList()[index])),
+            ),
+          ],
+        ),
       ),
     );
   }

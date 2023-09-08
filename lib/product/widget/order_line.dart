@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koyevi_kurye/core/utils/extensions/datetime_extensions.dart';
 import 'package:koyevi_kurye/product/models/siparis_model.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -26,7 +27,10 @@ class _SiparisSatirListTileState extends State<SiparisSatirListTile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("İsim: ${siparisModel.cariName}"),
-                Text("Sipariş tarihi:${siparisModel.orderDate}"),
+                siparisModel.orderDate != null
+                    ? Text(
+                        "Sipariş tarihi:${siparisModel.orderDate!.toFormattedString()}")
+                    : Container(),
                 Text("Ödeme tipi:${siparisModel.paymentTypeName}"),
                 Text("Tutar: ${siparisModel.total.toStringAsFixed(2)}"),
                 ExpansionTile(
@@ -38,12 +42,16 @@ class _SiparisSatirListTileState extends State<SiparisSatirListTile> {
                         children: [
                           Text(
                               "Adres sahibi: ${siparisModel.deliveryAddresDetail.adresBasligi}"),
-                          siparisModel
-                                  .deliveryAddresDetail.mobilePhone.isNotEmpty
+                          siparisModel.deliveryAddresDetail.mobilePhone !=
+                                      null &&
+                                  siparisModel.deliveryAddresDetail.mobilePhone!
+                                      .isNotEmpty
                               ? Text(
                                   "Telefon no:${siparisModel.deliveryAddresDetail.mobilePhone}")
                               : Container(),
-                          siparisModel.deliveryAddresDetail.email.isNotEmpty
+                          siparisModel.deliveryAddresDetail.email != null &&
+                                  siparisModel
+                                      .deliveryAddresDetail.email!.isNotEmpty
                               ? Text(
                                   "Email:${siparisModel.deliveryAddresDetail.email}")
                               : Container(),

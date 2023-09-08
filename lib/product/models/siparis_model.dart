@@ -3,7 +3,7 @@ class SiparisModel {
   final String orderGuid;
   final int orderID;
   final String ficheNo;
-  final String orderDate;
+  final DateTime? orderDate;
   final String paymentTypeName;
   final int lineCount;
   final double total;
@@ -28,7 +28,9 @@ class SiparisModel {
         orderGuid: json['OrderGuid'],
         orderID: json['OrderID'],
         ficheNo: json['FicheNo'],
-        orderDate: json['OrderDate'],
+        orderDate: json['OrderDate'] != null
+            ? DateTime.parse(json['OrderDate'])
+            : null,
         paymentTypeName: json['PaymentTypeName'],
         lineCount: json['LineCount'],
         total: json['Total'],
@@ -41,8 +43,8 @@ class SiparisModel {
 class DeliveryAddressDetailModel {
   final int id;
   final String adresBasligi;
-  late final String mobilePhone;
-  late final String email;
+  late final String? mobilePhone;
+  late final String? email;
   final String address;
   final String? relatedPerson;
   final String googleMapsUrl;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:koyevi_kurye/core/services/cache/cache_manager.dart';
 import 'package:koyevi_kurye/core/services/navigation/navigation_service.dart';
 import 'package:koyevi_kurye/view/auth/splash/splash_view.dart';
@@ -21,9 +22,13 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      child: MaterialApp(
-        navigatorKey: NavigationService.navigatorKey,
-        home: const SplashView(),
+      child: ScreenUtilInit(
+        builder: (context, child) => child!,
+        designSize: const Size(360, 640),
+        child: MaterialApp(
+          navigatorKey: NavigationService.navigatorKey,
+          home: const SplashView(),
+        ),
       ),
     );
   }

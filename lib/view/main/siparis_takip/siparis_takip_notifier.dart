@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:koyevi_kurye/core/services/network/network_service.dart';
 import 'package:koyevi_kurye/core/services/network/response_model.dart';
@@ -15,6 +17,7 @@ class SiparisTakipNotifier extends ChangeNotifier
       isLoading = true;
       ResponseModel ordersModel =
           await NetworkService.get("courier/OrderCheckList");
+      log(ordersModel.data.toString());
       if (ordersModel.success) {
         orders = ordersModel.data
             .map<SiparisModel>((e) => SiparisModel.fromJson(e))

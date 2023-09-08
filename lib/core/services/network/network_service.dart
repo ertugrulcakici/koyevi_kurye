@@ -17,7 +17,7 @@ abstract class NetworkService {
   static Future<void> init() async {
     try {
       Dio tempDio = Dio(BaseOptions(
-          sendTimeout: 5000, connectTimeout: 5000, receiveTimeout: 5000));
+          sendTimeout: 15000, connectTimeout: 15000, receiveTimeout: 15000));
       (tempDio.httpClientAdapter as DefaultHttpClientAdapter)
           .onHttpClientCreate = (HttpClient client) {
         client.badCertificateCallback =

@@ -44,6 +44,7 @@ dependencies:
   cached_network_image: ^3.2.3
   qr_bar_code_scanner_dialog: ^0.0.5
   url_launcher: ^6.1.10
+  flutter_screenutil: ^5.6.1
 
 dev_dependencies:
   flutter_test:
